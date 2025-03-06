@@ -1,0 +1,12 @@
+# Backend
+fastapi
+uvicorn
+sqlalchemy
+psycopg2-binary
+python-dotenv
+
+# Frontend
+react
+react-leaflet
+leaflet
+axios
