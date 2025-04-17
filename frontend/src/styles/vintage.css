@@ -1,0 +1,66 @@
+/* vintage.css - Styles vintage pour Memoterra */
+
+/* Fond général */
+body {
+    background: url('../components/assets/wood-texture.jpg') repeat;
+    font-family: 'Aref Ruqaa Ink', serif;
+    color: #3e2723;
+}
+
+/* Style de la carte */
+.historical-map-container .info-panel {
+    position: fixed;
+    top: 0;
+    right: -300px; /* Panneau caché à droite */
+    width: 300px;
+    height: 100vh;
+    background: url('../components/assets/parchment-texture.jpg') repeat;
+    background-size: cover;
+    border-left: 3px solid #5d4037;
+    padding: 20px;
+    box-shadow: -3px 0 12px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+    color: white;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+    opacity: 0;
+    transition: right 0.4s ease, opacity 0.5s ease;
+}
+
+/* Panneau visible quand un événement est sélectionné */
+.historical-map-container .info-panel.right-0 {
+    right: 0;
+    opacity: 1;
+}
+
+/* Effet parchemin pour les popups */
+.vintage-popup {
+    background: url('../components/assets/parchment-texture.jpg') repeat;
+    padding: 10px;
+    border: 3px solid #795548;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.marker-icon:hover {
+    animation: fadeIn 0.3s ease-in-out;
+    transform: scale(1.1);
+}
+
+/* Navigation */
+.navbar {
+    background: url('../components/assets/wood-texture.jpg') repeat;
+    background-color: rgba(223, 208, 176, 0.20); /* Semi-transparent pour voir le fond */
+    padding: 10px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    color: white;
+    text-align: center;
+}

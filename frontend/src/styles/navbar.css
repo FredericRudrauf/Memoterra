@@ -1,0 +1,52 @@
+/* navbar.css */
+.navbar {
+    height: 60px; /* Ajuste cette valeur selon la vraie hauteur de ta navbar */
+    display: flex;
+    align-items: center;
+    color: white;
+    padding: 10px 20px;
+    font-family: 'Aref Ruqaa Ink', serif;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 5px;
+}
+
+.navbar-title {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    margin-left: 10px
+}
+
+.navbar h1 {
+    font-size: 24px;
+}
+.navbar-menu {
+    display: flex;
+    list-style: none;
+    gap: 15px;
+    padding: 0;
+    margin-left: 20px;
+    align-items: center;
+}
+
+.navbar-menu li {
+    display: inline;
+}
+
+.navbar-menu li a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.navbar-menu li a:hover {
+    text-decoration: underline;
+}

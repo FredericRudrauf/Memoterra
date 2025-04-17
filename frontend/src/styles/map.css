@@ -1,0 +1,174 @@
+/* map.css */
+
+.historical-map-container {
+    position: relative;
+    font-family: 'Aref Ruqaa Ink', serif;
+    background-color: #f0e6d2;
+}
+
+.historical-map-container .info-panel {
+    transition: right 0.4s ease, opacity 0.5s ease;
+    opacity: 0;
+}
+
+.historical-map-container .info-panel.right-0 {
+    opacity: 1;
+    right: 0;
+}
+.map-wrapper {
+    position: relative;
+    display: flex;
+    width: calc(100%); /* Prend en compte la sidebar */
+    height: 100%; /* La hauteur de la carte */
+}
+
+.map-container {
+    flex: 1; /* Prend tout l’espace disponible à gauche */
+    margin-left: 230px;
+    margin-top: 80px; /* Correspond à la hauteur de la navbar */
+    height: calc(100vh - 80px); /* Ajuste pour enlever la navbar */
+    width: calc(100% - 200px);
+    position: relative;
+}
+
+.filter-container {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 400;
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 12px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.filter-container select {
+    background-color: #dfd0b0;
+    border: 1px solid #9b8e77;
+    color: #3e2a47;
+    font-size: 16px;
+    padding: 5px;
+    border-radius: 5px;
+    font-family: 'Aref Ruqaa Ink', serif;
+}
+
+.filter-container select:hover {
+    background-color: #c8b39e;
+}
+
+.filter-container label {
+    font-family: 'Aref Ruqaa Ink', serif;
+    font-size: 16px;
+    color: #3e2a47;
+    margin-right: 8px;
+}
+
+.info-panel {
+    position: absolute;
+    top: 80px;
+    right: 0;
+    width: 360px;
+    height: calc(100vh - 80px); /* Hauteur égale à la carte */
+    background: url('../components/assets/parchment-texture.jpg') repeat;
+    background-size: cover;
+    border-left: 3px solid #5d4037;
+    transition: right 0.3s ease-in-out;
+    box-shadow: -3px 0 12px rgba(0, 0, 0, 0.4); /* Ombre plus marquée */
+    z-index: 1100;
+    color: white;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+    font-family: 'Aref Ruqaa Ink', serif; /* Plus ancien et élégant */
+    /* overflow-y: auto; */
+    display: flex;
+    flex-direction: column;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    overflow: hidden; /* Empêche le scrolling global */
+}
+
+/* Conteneur du contenu interne du panneau */
+.info-content {
+    display: grid;
+    grid-template-rows: auto auto auto auto auto 1fr auto auto;
+    gap: 10px;
+    overflow: hidden; /* Empêche le scrolling global */
+}
+
+.info-panel.right-0 {
+    right: 0;
+}
+
+.leaflet-container {
+    z-index: 0; /* Assure que la carte reste en arrière-plan */
+}
+
+.info-panel h3 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #d1b088;
+}
+
+.info-panel p {
+    font-size: 16px;
+    line-height: 1.4;
+    color: #f1e1c6; /* Un peu plus clair pour le texte */
+    margin-bottom: 10px;
+}
+
+.info-panel small {
+    color: #d1b088;
+    font-style: italic;
+}
+
+.close-button {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: #f1e1c6;
+    cursor: pointer;
+}
+
+.close-button:hover {
+    color: #c75f5f;
+}
+
+/* Affichage du panneau lorsqu'un événement est sélectionné */
+.historical-map-container .info-panel {
+    right: 0;
+}
+
+/* La description doit avoir un scroll si nécessaire */
+.event-description {
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.event-image {
+    width: 100%;
+    max-height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Liens bien visibles */
+.video-link, .source-link {
+    display: block;
+    margin-top: 5px;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.video-link:hover, .source-link:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+.source-link {
+    word-break: break-word; /* Gérer les longues URL */
+}
