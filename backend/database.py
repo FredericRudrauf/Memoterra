@@ -1,34 +1,38 @@
 # backend/database.py
 import os
 import urllib.parse
-from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from psycopg_pool import AsyncConnectionPool
 from dotenv import load_dotenv
+from fastapi import HTTPException
+import logging
 
 load_dotenv()
 
-# Récupérer les informations de connexion
-DB_USER = os.getenv("DB_USER", "mapuser")
-DB_PASSWORD = os.getenv("DB_PASSWORD", "your_password_with_*")
+DB_USER = os.getenv("DB_USER", "devFred")
+DB_PASSWORD = os.getenv("DB_PASSWORD", "Victoria421")
 DB_HOST = os.getenv("DB_HOST", "localhost")
 DB_NAME = os.getenv("DB_NAME", "historical_map")
 
-# Encoder explicitement le mot de passe pour gérer les caractères spéciaux
 encoded_password = urllib.parse.quote_plus(DB_PASSWORD)
-
-# Construction de l'URL avec le mot de passe encodé
 DATABASE_URL = f"postgresql://{DB_USER}:{encoded_password}@{DB_HOST}/{DB_NAME}"
 
-print(f"Connexion à: postgresql://{DB_USER}:***@{DB_HOST}/{DB_NAME}")  # Ne pas afficher le vrai mot de passe
+pool = None  # Déclarer le pool globalement mais sans l'instancier immédiatement
 
-engine = create_engine(DATABASE_URL)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-Base = declarative_base()
+async def init_db():
+    """Initialiser le pool de connexions asynchrones."""
+    global pool
+    if pool is None:
+        try:
+            pool = AsyncConnectionPool(DATABASE_URL, min_size=1, max_size=5)
+            await pool.open()  # Ouvrir le pool explicitement
+        except Exception as e:
+            logging.error(f"Erreur lors de l'initialisation du pool : {e}")
+            raise HTTPException(status_code=500, detail="Erreur de base de données")
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+async def get_db():
+    """Obtenir une connexion depuis le pool."""
+    if pool is None:
+        await init_db()  # S'assurer que le pool est bien initialisé
+    async with pool.connection() as conn:
+        async with conn.cursor() as cur:
+            yield cur
